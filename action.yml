@@ -20,19 +20,19 @@ inputs:
     default: fuck--u--code
     required: false
   color-bad-score:
-    description: "Color of the badge for fuck-u-code scores < 50. Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
+    description: "Color of the badge for fuck-u-code scores < 60. Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
     default: red
     required: false
   color-ok-score:
-    description: "Color of the badge for fuck-u-code scores in range [50,80). Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
+    description: "Color of the badge for fuck-u-code scores in range [60,90). Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
     default: orange
     required: false
   color-good-score:
-    description: "Color of the badge for fuck-u-code scores in range [80,100). Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
+    description: "Color of the badge for fuck-u-code scores in range [90,100). Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
     default: yellow
     required: false
   color-perfect-score:
-    description: "Color of the badge for fuck-u-code scores == 10. Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
+    description: "Color of the badge for fuck-u-code scores == 100. Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
     default: brightgreen
     required: false
   badge-artifact-name:
@@ -79,11 +79,13 @@ runs:
     -
       name: "Install fuck-u-code"
       run: |
+        # install the fuck-u-code from source
         go install github.com/Done-0/fuck-u-code/cmd/fuck-u-code@latest
       shell: bash
     -
       name: "Scan package(s)"
       run: |
+        # add go bin path to path
         export PATH="$PATH:$(go env GOPATH)/bin"
 
         # echo to std
@@ -96,36 +98,43 @@ runs:
       name: "Get numeric fuck-u-code score and badge color"
       id: parameters-badge
       run: |
+        # check if en-US is specified in the args
         if [[ "$(echo ${{ inputs.fuck-u-code-args || 'never mind'}} |grep 'en-US')" != "" ]];then
+          # if yes, grep it under en-US
           fuck_u_code_score_w_delta=$(grep 'Overall Score:' fuck-u-code_score.txt |cut -b 18- | sed 's/ \/ 100 -.*//g')
         else
+          # if no, grep it under zh-CN
           fuck_u_code_score_w_delta=$(grep '总体评分:' fuck-u-code_score.txt |cut -b 17- | sed 's/ \/ 100 -.*//g')
         fi
         # reversed score. the higher the better
         code_score_r=$(echo 100-$fuck_u_code_score_w_delta|bc)
 
+        # check if requested to use original score
         if [[ "${{ inputs.fuck-u-code-args || 'never mind'}}" == 'false' ]];then
           # use original score 
           score_badge=$fuck_u_code_score_w_delta
 
+          # classify the badge color according to the score
           badge_color=$(echo $score_badge | awk \
             -v perf=${{ inputs.color-perfect-score }} \
             -v good=${{ inputs.color-good-score }} \
             -v ok=${{ inputs.color-ok-score }} \
             -v bad=${{ inputs.color-bad-score }} \
               '{
-                if($1>=80){print bad} else {
-                  if($1>=50){print ok} else {
-                    if($1>=20){print good} else {
-                      print bad
+                if($1>=40){print bad} else {
+                  if($1>=10){print ok} else {
+                    if($1>=0){print good} else {
+                      print perf
                     }
                   }
                 }
               }'
           )
         else
+          # otherwise, use the reversed score
           score_badge=$code_score_r
-          
+
+          # classify the badge color according to the score
           badge_color=$(echo $score_badge | awk \
             -v perf=${{ inputs.color-perfect-score }} \
             -v good=${{ inputs.color-good-score }} \
@@ -133,8 +142,8 @@ runs:
             -v bad=${{ inputs.color-bad-score }} \
               '{
                 if($1==100){print perf} else {
-                  if($1>=80){print good} else {
-                    if($1>=50){print ok} else {
+                  if($1>=90){print good} else {
+                    if($1>=60){print ok} else {
                       print bad
                     }
                   }
@@ -142,10 +151,12 @@ runs:
               }'
           )
         fi
-          
+        
+        # set outputs
         echo badge_color=$badge_color >> $GITHUB_OUTPUT
         echo score_badge=$score_badge >> $GITHUB_OUTPUT
 
+        # set vars
         echo badge_color=$badge_color
         echo score_badge=$score_badge
       shell: bash
@@ -154,18 +165,24 @@ runs:
       name: Expected Badge path and fetch 
       id: download-badge
       run: |
+        # set logo, if set
         if [[ "${{ inputs.badge-logo-id }}" != "" ]];then
           logo_str="?logo=${{ inputs.badge-logo-id }}&logoColor=white"
         else
           logo_str=""
         fi
+        # compose the badge link
         svg_link="https://img.shields.io/badge/$(echo ${{ inputs.badge-text }} | sed 's/ /%20/g')-${{ steps.parameters-badge.outputs.score_badge }}-${{ steps.parameters-badge.outputs.badge_color }}${logo_str}"
         echo SVG link: $svg_link
 
+        # create the badge path 
         badge_path="$(mktemp --suffix='oh-my-awesome-badge' -u)"
         mkdir -p  $badge_path
+
+        # set as output
         echo "badge_path=$badge_path" >> $GITHUB_OUTPUT
 
+        # download it as a svg file
         curl -s -o $badge_path/${{ inputs.badge-file-name }}.svg $svg_link
 
       shell: bash
@@ -185,9 +202,10 @@ runs:
         apiToken: ${{ inputs.CLOUDFLARE_API_TOKEN }}
         command: r2 object put  ${{ inputs.R2_BUCKET }}/${{ inputs.R2_badge_path }}/${{ inputs.badge-file-name }}.svg --file ${{ steps.download-badge.outputs.badge_path }}/${{ inputs.badge-file-name }}.svg --content-type image/svg+xml
 
-    - name: Echo as markdown
+    - name: Echo as markdown string
       shell: bash
       run: |
+        # output the markdown string for set badge w/ convinience
         echo '--------------------- badge path --------------------
         echo "[![${{ inputs.badge-text }}](https://<link-to-r2-bucket>/${{ inputs.R2_badge_path }}/${{ inputs.badge-file-name }}.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)"
         echo '--------------------- badge path --------------------
