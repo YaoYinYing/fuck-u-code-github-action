@@ -97,7 +97,7 @@ runs:
       id: parameters-badge
       run: |
 
-        if [[ "$(echo ${{ inputs.fuck-u-code-args }} |grep 'en-US')" != "" ]];then
+        if [[ "$(echo ${{ inputs.fuck-u-code-args || 'never mind'}} |grep 'en-US')" != "" ]];then
           fuck_u_code_score_w_delta=$(grep 'Overall Score:' fuck-u-code_score.txt |cut -b 18- | sed 's/ \/ 100 -.*//g')
         else
           fuck_u_code_score_w_delta=$(grep '总体评分:' fuck-u-code_score.txt |cut -b 17- | sed 's/ \/ 100 -.*//g')
@@ -105,7 +105,7 @@ runs:
         # reversed score. the higher the better
         code_score_r=$(echo 100-$fuck_u_code_score_w_delta|bc)
 
-        if [[ "${{ inputs.fuck-u-code-args }}" == 'false' ]];then
+        if [[ "${{ inputs.fuck-u-code-args || 'never mind'}}" == 'false' ]];then
           # use original score 
           score_badge=$fuck_u_code_score_w_delta
 
