@@ -16,8 +16,8 @@ inputs:
     required: false
     default: 'false'
   badge-text:
-    description: "Text to display in the badge"
-    default: fuck-u-code
+    description: "Text to display in the badge. Please use double dashes to replace single dashes, e.g. `fuck--u--codet` to represent `fuck-u-code`"
+    default: fuck--u--code
     required: false
   color-bad-score:
     description: "Color of the badge for fuck-u-code scores < 50. Hex, rgb, rgba, hsl, hsla and css named colors can all be used"
