@@ -96,7 +96,6 @@ runs:
       name: "Get numeric fuck-u-code score and badge color"
       id: parameters-badge
       run: |
-
         if [[ "$(echo ${{ inputs.fuck-u-code-args || 'never mind'}} |grep 'en-US')" != "" ]];then
           fuck_u_code_score_w_delta=$(grep 'Overall Score:' fuck-u-code_score.txt |cut -b 18- | sed 's/ \/ 100 -.*//g')
         else
@@ -124,7 +123,7 @@ runs:
                 }
               }'
           )
-        else;
+        else
           score_badge=$code_score_r
           
           badge_color=$(echo $score_badge | awk \
