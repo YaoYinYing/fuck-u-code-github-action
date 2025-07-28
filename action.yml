@@ -109,9 +109,9 @@ runs:
         # reversed score. the higher the better
         code_score_r=$(echo 100-$fuck_u_code_score_w_delta|bc)
 
-        # check if requested to use original score
-        if [[ "${{ inputs.fuck-u-code-args || 'never mind'}}" == 'false' ]];then
-          # use original score 
+        # check if requested to use reversed score
+        if [[ "${{ inputs.reverse-score || 'never mind'}}" != 'true' ]];then
+          # if not true, use original score 
           score_badge=$fuck_u_code_score_w_delta
 
           # classify the badge color according to the score
@@ -130,6 +130,7 @@ runs:
                 }
               }'
           )
+          echo label_color=green >> $GITHUB_OUTPUT
         else
           # otherwise, use the reversed score
           score_badge=$code_score_r
@@ -150,6 +151,7 @@ runs:
                 }
               }'
           )
+          echo label_color=purple >> $GITHUB_OUTPUT
         fi
         
         # set outputs
@@ -167,12 +169,21 @@ runs:
       run: |
         # set logo, if set
         if [[ "${{ inputs.badge-logo-id }}" != "" ]];then
-          logo_str="?logo=${{ inputs.badge-logo-id }}&logoColor=white"
+          logo_str="logo=${{ inputs.badge-logo-id }}&logoColor=white"
         else
           logo_str=""
         fi
+
+        repo_link= ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}
+        repo_link_url_encoded=$(echo $repo_link | sed 's/:/%3A/g' | sed 's/\//%2F/g')
+
+        # check the link strings
+        echo repo_link=$repo_link
+        echo repo_link_url_encoded=$repo_link_url_encoded
         # compose the badge link
-        svg_link="https://img.shields.io/badge/$(echo ${{ inputs.badge-text }} | sed 's/ /%20/g')-${{ steps.parameters-badge.outputs.score_badge }}-${{ steps.parameters-badge.outputs.badge_color }}${logo_str}"
+        # https://img.shields.io/badge/$(echo ${{ inputs.badge-text }} | sed 's/ /%20/g')-${{ steps.parameters-badge.outputs.score_badge }}-${{ steps.parameters-badge.outputs.badge_color }}?${logo_str}&labelColor=${{ steps.parameters-badge.outputs.label_color }}&link=https%3A%2F%2Fgithub.com%2FYaoYinYing%2Ffuck-u-code-github-action&link=${repo_link_url_encoded}
+
+        svg_link="https://img.shields.io/badge/$(echo ${{ inputs.badge-text }} | sed 's/ /%20/g')-${{ steps.parameters-badge.outputs.score_badge }}-${{ steps.parameters-badge.outputs.badge_color }}?${logo_str}&labelColor=${{ steps.parameters-badge.outputs.label_color }}&link=https%3A%2F%2Fgithub.com%2FYaoYinYing%2Ffuck-u-code-github-action&link=${repo_link_url_encoded}"
         echo SVG link: $svg_link
 
         # create the badge path 
