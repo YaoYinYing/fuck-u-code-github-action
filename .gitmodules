@@ -1,0 +1,3 @@
+[submodule "tests/python/case_1"]
+	path = tests/python/case_1
+	url = https://github.com/YaoYinYing/RosettaPy
