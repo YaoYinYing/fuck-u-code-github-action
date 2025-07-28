@@ -89,7 +89,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run fuck-u-code Analysis
-        uses: YaoYinYing/fuck-u-code-github-action@v1.0.1
+        uses: YaoYinYing/fuck-u-code-github-action@v1.1.0
         with:
           target-path: src                        # analyze the 'src' directory
           reverse-score: "true"                   # treat higher score as better code
