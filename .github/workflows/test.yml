@@ -40,7 +40,7 @@ jobs:
         with:
           target-path: tests/${{matrix.case_type}}/case_${{matrix.case_id}} # scan src package only
           reverse-score: ${{matrix.reverse_score}}
-          badge-text: ${{matrix.case_type}}_case_#${{matrix.case_id}}
+          badge-text: ${{matrix.case_type}}_case_%23${{matrix.case_id}}
           badge-file-name: fuck-u-code_scan
           badge-logo-id: ${{matrix.case_type}}
           badge-artifact-name: upload-my-awesome-badge-${{ github.run_id }}
