@@ -2,6 +2,9 @@
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/YaoYinYing/fuck-u-code-github-action)
 
+## CI
+[![python_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/python_case_#1_false/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
+[![python_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/python_case_#1_true/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
 ## Introduction
 
 This GitHub Action runs a **code quality analysis** using the [**fuck-u-code** CLI tool](https://github.com/Done-0/fuck-u-code) and automatically generates a **dynamic status badge** based on the analysis score. The **fuck-u-code** tool evaluates your codebase on a scale of 0–100 (the "shitty code index"), examining factors like complexity, duplication, naming, etc., to determine how "bad" the code is. By default, a higher score means **worse code quality** (100 indicates very poor quality, and 0 indicates very clean code). This Action can *optionally* **reverse the scoring** to treat 100 as a perfect score (good code) for more intuitive badging.
@@ -14,7 +17,7 @@ Before using this action, ensure the following are set up:
 
 * **GitHub Actions Runner with Go** – The action uses Go to install and run the `fuck-u-code` CLI. GitHub’s default Ubuntu runners (`ubuntu-latest`) come with Go pre-installed. If using a self-hosted runner or a different OS, make sure Go is available (or add a step with `actions/setup-go`).
 * **Cloudflare R2 Bucket** – Create a Cloudflare R2 storage bucket where the badge will be stored. If you want to embed the badge publicly, configure the bucket (or a Workers script / custom domain) for public read access. For example, you might enable the R2 **Public Bucket** feature or set up a Cloudflare Worker to serve the bucket content.
-* **Cloudflare API Token** – Generate a Cloudflare API token with permissions to **write to R2** (at minimum, *R2 Storage: Edit* permission for your account). Note your Cloudflare Account ID if needed. Save the API token as a GitHub repository secret (e.g. `CLOUDFLARE_API_TOKEN`).
+* **Cloudflare API Token** – Generate a Cloudflare API token with permissions to **write to R2** (Workers R2 Storage:Edit, Account Settings:Read,Memberships:Read, User Details:Read). Note your Cloudflare Account ID if needed. Save the API token as a GitHub repository secret (e.g. `CLOUDFLARE_API_TOKEN`).
 * **R2 Bucket Name** – Note the name of the R2 bucket you created. It will be needed as input. You can hard-code it or store it as a secret (e.g. `R2_BUCKET`). Make sure the bucket exists prior to running the workflow (the action will not create the bucket).
 * **Optional**: If your R2 setup requires specifying the account ID (in addition to the token), you may need to provide it to the Cloudflare action (for example via an environment variable or an input `accountId` to `cloudflare/wrangler-action`). In many cases, if the API token is scoped to a single account, you won’t need to separately specify the account ID.
 
@@ -103,6 +106,20 @@ When this workflow runs, it will perform the following steps internally:
 5. Upload the badge SVG as a GitHub Actions artifact (so you can download it from the workflow run page if needed).
 6. Upload the badge SVG to the Cloudflare R2 bucket at the given path (using the `cloudflare/wrangler-action`).
 7. Finally, the action echoes a Markdown snippet in the logs containing the badge image reference, for easy copying.
+
+## Create a proper Cloudflare R2 token
+
+1. Go to the Cloudflare dashboard.
+2. User -> Profile -> API Tokens -> Create Token
+  ![Step in](./img/token/1.step_in.png)
+3. Pick `Edit Cloudflare Workers` -> `Use template`
+  ![Pick template](./img/token/2.pick_template.png)
+4. Edit the token name and permissions.
+  ![Edit permissions](./img/token/3.edit_permission.png)
+5. Confirm the permissions.
+  ![Confirm permissions](./img/token/4.confirm_permission.png)
+6. Copy the token and add to the repo secrets.
+   ![Step in](./img/token/5.copy_token.png)
 
 ## Accessing and Embedding the Badge
 
