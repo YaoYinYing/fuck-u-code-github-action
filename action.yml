@@ -91,13 +91,17 @@ runs:
         # echo to std
         fuck-u-code analyze --verbose ${{ inputs.fuck-u-code-args }} ${{ inputs.target-path }}
         # save as a text
+        echo fuck-u-code analyze --verbose ${{ inputs.fuck-u-code-args }} ${{ inputs.target-path }} > fuck-u-code_score.txt
+        echo pwd=$(pwd)
         fuck-u-code analyze --verbose ${{ inputs.fuck-u-code-args }} ${{ inputs.target-path }} > fuck-u-code_score.txt
-        
+        ls 
       shell: bash
     -
       name: "Get numeric fuck-u-code score and badge color"
       id: parameters-badge
       run: |
+        echo pwd=$(pwd)
+        ls
         # check if en-US is specified in the args
         if [[ "$(echo ${{ inputs.fuck-u-code-args || 'never mind'}} |grep 'en-US')" != "" ]];then
           # if yes, grep it under en-US

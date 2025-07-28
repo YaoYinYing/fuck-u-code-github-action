@@ -46,4 +46,4 @@ jobs:
           badge-artifact-name: upload-my-awesome-badge-${{ github.run_id }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           R2_BUCKET: ${{ secrets.R2_BUCKET }}
-          R2_badge_path: badge_dir_with_uniq_name/RosettaPy/fuck-u-code
+          R2_badge_path: badge_dir_with_uniq_name/FUC-GHA/tests/${{matrix.case_type}}_case_#${{matrix.case_id}}_${{matrix.reverse_score}}
