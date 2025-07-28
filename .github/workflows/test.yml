@@ -36,7 +36,7 @@ jobs:
           git submodule update --init --recursive
 
       - name: Scaning
-        uses: YaoYinYing/fuck-u-code-github-action@${{ github.sha }}
+        uses: YaoYinYing/fuck-u-code-github-action@${{ GITHUB_SHA }}
         with:
           target-path: tests/${{matrix.case_type}}/${{matrix.case_id}} # scan src package only
           reverse-score: ${{matrix.reverse_score}}
