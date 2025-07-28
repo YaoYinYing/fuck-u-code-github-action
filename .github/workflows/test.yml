@@ -20,10 +20,10 @@ jobs:
         case_type: 
           - python
           - go
-          - cpp
+          - cplusplus
           - c
           - java
-          - js
+          - javascript
         case_id: 
           - 1
         reverse_score:
@@ -48,7 +48,7 @@ jobs:
           badge-text: ${{matrix.case_type}}_case_%23${{matrix.case_id}}
           badge-file-name: fuck-u-code_scan
           badge-logo-id: ${{matrix.case_type}}
-          badge-artifact-name: upload-my-awesome-badge-${{ github.run_id }}
+          badge-artifact-name: upload-my-awesome-badge-${{ github.run_id }}-${{matrix.case_type}}-${{matrix.case_id}}-${{matrix.reverse_score}}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           R2_BUCKET: ${{ secrets.R2_BUCKET }}
           R2_badge_path: badge_dir_with_uniq_name/FUC-GHA/tests/${{matrix.case_type}}_case_${{matrix.case_id}}_${{matrix.reverse_score}}
