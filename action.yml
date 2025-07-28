@@ -178,15 +178,12 @@ runs:
           logo_str=""
         fi
 
-        repo_link= ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}
-        repo_link_url_encoded=$(echo $repo_link | sed 's/:/%3A/g' | sed 's/\//%2F/g')
-
-        # check the link strings
+        repo_link="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}"
         echo repo_link=$repo_link
+        repo_link_url_encoded="$(echo $repo_link | sed 's/:/%3A/g' | sed 's/\//%2F/g')"
         echo repo_link_url_encoded=$repo_link_url_encoded
+        
         # compose the badge link
-        # https://img.shields.io/badge/$(echo ${{ inputs.badge-text }} | sed 's/ /%20/g')-${{ steps.parameters-badge.outputs.score_badge }}-${{ steps.parameters-badge.outputs.badge_color }}?${logo_str}&labelColor=${{ steps.parameters-badge.outputs.label_color }}&link=https%3A%2F%2Fgithub.com%2FYaoYinYing%2Ffuck-u-code-github-action&link=${repo_link_url_encoded}
-
         svg_link="https://img.shields.io/badge/$(echo ${{ inputs.badge-text }} | sed 's/ /%20/g')-${{ steps.parameters-badge.outputs.score_badge }}-${{ steps.parameters-badge.outputs.badge_color }}?${logo_str}&labelColor=${{ steps.parameters-badge.outputs.label_color }}&link=https%3A%2F%2Fgithub.com%2FYaoYinYing%2Ffuck-u-code-github-action&link=${repo_link_url_encoded}"
         echo SVG link: $svg_link
 
