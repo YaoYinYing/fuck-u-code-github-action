@@ -1,3 +1,18 @@
 [submodule "tests/python/case_1"]
 	path = tests/python/case_1
 	url = https://github.com/YaoYinYing/RosettaPy
+[submodule "tests/go/case_1"]
+	path = tests/go/case_1
+	url = https://github.com/Done-0/fuck-u-code
+[submodule "tests/cpp/case_1"]
+	path = tests/cpp/case_1
+	url = https://github.com/tindy2013/subconverter
+[submodule "tests/c/case_1"]
+	path = tests/c/case_1
+	url = https://github.com/soedinglab/MMseqs2
+[submodule "tests/js/case_1"]
+	path = tests/js/case_1
+	url = https://github.com/ShouChenICU/FastSend
+[submodule "tests/java/case_1"]
+	path = tests/java/case_1
+	url = https://github.com/TheAlgorithms/Java

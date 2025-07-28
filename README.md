@@ -3,8 +3,24 @@
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/YaoYinYing/fuck-u-code-github-action)
 
 ## CI
+
+[![Fuck U Code Scan](https://github.com/YaoYinYing/fuck-u-code-github-action/actions/workflows/test.yml/badge.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action/actions/workflows/test.yml)
+
+## Case tests
+
 [![python_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/python_case_1_false/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
 [![python_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/python_case_1_true/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
+[![go_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/go_case_1_false/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
+[![go_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/go_case_1_true/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
+[![c_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/c_case_1_false/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
+[![c_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/c_case_1_true/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
+[![cpp_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/cpp_case_1_false/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
+[![cpp_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/cpp_case_1_true/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
+[![java_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/java_case_1_false/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
+[![java_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/java_case_1_true/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
+[![js_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/js_case_1_false/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
+[![js_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/js_case_1_true/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
+
 ## Introduction
 
 This GitHub Action runs a **code quality analysis** using the [**fuck-u-code** CLI tool](https://github.com/Done-0/fuck-u-code) and automatically generates a **dynamic status badge** based on the analysis score. The **fuck-u-code** tool evaluates your codebase on a scale of 0–100 (the "shitty code index"), examining factors like complexity, duplication, naming, etc., to determine how "bad" the code is. By default, a higher score means **worse code quality** (100 indicates very poor quality, and 0 indicates very clean code). This Action can *optionally* **reverse the scoring** to treat 100 as a perfect score (good code) for more intuitive badging.
