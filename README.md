@@ -10,14 +10,19 @@
 
 [![python_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/python_case_1_false/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
 [![python_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/python_case_1_true/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
+
 [![go_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/go_case_1_false/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
 [![go_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/go_case_1_true/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
+
 [![c_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/c_case_1_false/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
 [![c_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/c_case_1_true/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
+
 [![cpp_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/cplusplus_case_1_false/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
 [![cpp_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/cplusplus_case_1_true/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
+
 [![java_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/java_case_1_false/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
 [![java_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/java_case_1_true/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
+
 [![js_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/javascript_case_1_false/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
 [![js_case_%231](https://github-image-cache.yaoyy.moe/badge_dir_with_uniq_name/FUC-GHA/tests/javascript_case_1_true/fuck-u-code_scan.svg)](https://github.com/YaoYinYing/fuck-u-code-github-action)
 
